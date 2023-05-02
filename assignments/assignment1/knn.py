@@ -119,7 +119,7 @@ class KNN:
                 sub_labels = self.train_y[np.argsort(dists[i])[:self.k]]
                 num_true = np.sum(np.where(sub_labels == True, 1, 0))
                 num_false = np.sum(np.where(sub_labels == False, 1, 0))
-                if num_true > num_false:
+                if num_true >= num_false:
                     pred[i] = True
                 else:
                     pred[i] = False
