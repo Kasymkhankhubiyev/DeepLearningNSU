@@ -111,14 +111,14 @@ class KNN:
         '''
         num_test = dists.shape[0]
         pred = np.zeros(num_test, bool)
-        labels = self.train_y[np.argsort(dists, axis=0)]
+
         for i in range(num_test):
             if self.k == 1:
-                pred[i] = labels[i][0]
+                pred[i] = self.train_y[np.argmin(dists[i])]
             else:
-                sub_labels = labels[i][:self.k]
-                num_true = sub_labels[np.where(sub_labels==True)].shape[0]
-                num_false = sub_labels[np.where(sub_labels==False)].shape[0]
+                sub_labels = self.train_y[np.argsort(dists[i])[:self.k]]
+                num_true = np.sum(np.where(sub_labels == True, 1, 0))
+                num_false = np.sum(np.where(sub_labels == False, 1, 0))
                 if num_true > num_false:
                     pred[i] = True
                 else:
