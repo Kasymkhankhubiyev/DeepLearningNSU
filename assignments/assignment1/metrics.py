@@ -46,5 +46,6 @@ def multiclass_accuracy(prediction, ground_truth):
     Returns:
     accuracy - ratio of accurate predictions to total samples
     '''
-    # TODO: Implement computing accuracy
-    return 0
+    accuracy = np.sum(np.where(prediction == ground_truth, 1, 0))
+
+    return accuracy / len(ground_truth)
