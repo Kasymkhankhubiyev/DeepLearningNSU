@@ -13,8 +13,9 @@ def l2_regularization(W, reg_strength):
       loss, single value - l2 regularization loss
       gradient, np.array same shape as W - gradient of weight by l2 loss
     """
-    # TODO: Copy from the previous assignment
-    raise Exception("Not implemented!")
+    loss = reg_strength * np.trace(np.matmul(W.T, W))  # L2(W) = l * tr(W.T * W)
+    grad = 2 * reg_strength * W  # dl2(W) / dW = 2 * l * W
+
     return loss, grad
 
 def softmax(predictions):
