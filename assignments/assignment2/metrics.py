@@ -13,6 +13,12 @@ def multiclass_accuracy(prediction, ground_truth):
     accuracy - ratio of accurate predictions to total samples
     """
 
-    accuracy = np.sum(np.where(prediction == ground_truth, 1, 0))
+    # accuracy = np.sum(np.where(prediction == ground_truth, 1, 0))
+    #
+    # return accuracy / len(ground_truth)
 
-    return accuracy / len(ground_truth)
+    tpn = 0
+    for i in range(len(prediction)):
+        if prediction[i] == ground_truth[i]:
+            tpn += 1
+    return tpn / len(prediction)

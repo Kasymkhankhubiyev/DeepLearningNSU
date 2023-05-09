@@ -1,6 +1,6 @@
 import numpy as np
 
-from layers import FullyConnectedLayer, ReLULayer, softmax_with_cross_entropy, l2_regularization
+from layers import FullyConnectedLayer, ReLULayer, softmax_with_cross_entropy, l2_regularization, softmax
 
 
 class TwoLayerNet:
@@ -34,9 +34,6 @@ class TwoLayerNet:
         """
         for _, param in self.params().items():
             param.grad = np.zeros_like(param.value)
-        
-        # TODO Compute loss and fill param gradients
-        # by running forward and backward passes through the model
 
         # forward pass
         out = X.copy()
@@ -67,13 +64,12 @@ class TwoLayerNet:
         Returns:
           y_pred, np.array of int (test_samples)
         """
-        pred = np.zeros(X.shape[0], int)
-
         output = X.copy()
         for layer in self.layers:
             output = layer.forward(output)
+        # output = softmax(output)
 
-        return pred + np.argmax(output, axis=1)
+        return np.argmax(output, axis=1)
 
     def params(self):
         result = {}

@@ -107,8 +107,8 @@ class ReLULayer:
         self.dx = 0
 
     def forward(self, X):
-        self.dx = np.where(X > 0, 1, 0)
-        return np.where(X > 0, X, 0)
+        self.dx = np.greater(X, 0).astype(float)
+        return np.maximum(X, 0)
 
     def backward(self, d_out):
         """
